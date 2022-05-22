@@ -1,0 +1,54 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {% load livereload_tags %}
+
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/tailwind-output.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/keisuu_web.css' %}">
+        {% load static wagtailsettings_tags %}
+        {% get_settings %}
+        {# Global stylesheets #}
+
+        {# Snipcart #}
+        {% if settings.home.SnipcartSettings.api_key %}
+        <script async src="<https://cdn.snipcart.com/themes/v3.2.1/default/snipcart.js>"></script>
+        <div hidden id="snipcart" data-api-key="{{ settings.home.SnipcartSettings.api_key }}"></div>
+        <link rel="stylesheet" href="<https://cdn.snipcart.com/themes/v3.2.1/default/snipcart.css>" />
+        {% endif %}
+
+        {% livereload_script %}
+        {# Global stylesheets #}
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        {% block content %}{% endblock %}
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/keisuu_web.js' %}"></script>
+
+        {% block extra_js %}
+        {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>
