@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
+    "wagtail.contrib.simple_translation",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail.locales",
+    "wagtail_localize",
+    # "wagtail_localize.locales",
     "wagtail",
     "modelcluster",
     "taggit",
@@ -47,7 +51,27 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "livereload",
+    "tailwind",
+    "keisuu",
+    "django_browser_reload"
 ]
+
+TAILWIND_APP_NAME = 'keisuu'
+
+USE_I18N = True
+WAGTAIL_I18N_ENABLED = True
+USE_L10N = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ('en', "English"),
+    ('ja', "Japan"),
+    ('id', "Indonesia"),
+    ('zh', 'Chinese'),
+    ('es', "Spanish"),
+    ('my', 'Burmese'),
+]
+
+WAGTAILSIMPLETRANSLATION_SYNC_PAGE_TREE = True
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -57,11 +81,15 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    'livereload.middleware.LiveReloadScript',
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "livereload.middleware.LiveReloadScript",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "keisuu_web.urls"
+# NPM_BIN_PATH = '/usr/local/bin/npm'
 
 TEMPLATES = [
     {
@@ -76,6 +104,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
             ],
         },
     },
@@ -121,6 +150,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

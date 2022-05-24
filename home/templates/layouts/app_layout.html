@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_class %}
+  template-homepage
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+{% endblock extra_css %}
+
+{% block navigation %}
+  {% include "components/navigation_view.html" %}
+{% endblock navigation %}
+
+{% block content %}{% endblock content %}
+
+{% block footer %}
+  {% include "components/footer_view.html" %}
+{% endblock footer %}
