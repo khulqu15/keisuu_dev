@@ -4,7 +4,16 @@
             <div id="brand-nav" class="p-5 col-span-4 md:col-span-1 flex border-b-2 md:border-b-0 border-gray-200">
                 <img src="/media/images/keisuu-x.png" class="h-7" alt="KeisuuGiken Logo">
             </div>
+            {% load wagtailcore_tags %}
             <div id="menu-nav" class="p-4 col-span-4 md:col-span-2 max-h-52 overflow-auto">
+
+                {% for publication in page.related_publications.all %}
+                    <li>
+                        <a href="{% pageurl publication.detail_page fallback='coming_soon' %}">
+                            {{ publication.title }}
+                        </a>
+                    </li>
+                {% endfor %}
                 <ul class="block md:flex gap-x-2 justify-end text-sm">
                     <li role="button" class="hover:bg-gray-100 rounded-lg transition-all py-2 px-3 mb-4 md:my-0">Home</li>
                     <li role="button" class="hover:bg-gray-100 rounded-lg transition-all py-2 px-3 my-4 md:my-0">Research</li>

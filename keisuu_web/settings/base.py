@@ -89,7 +89,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "keisuu_web.urls"
-# NPM_BIN_PATH = '/usr/local/bin/npm'
+NPM_BIN_PATH = "/usr/bin/npm"
 
 TEMPLATES = [
     {
